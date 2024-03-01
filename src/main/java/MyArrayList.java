@@ -3,18 +3,15 @@ import java.util.Arrays;
 
 public class MyArrayList<T> implements List<T> {
     private static final int CAPACITY = 10;
-
-    private T[] array;
+    private Object[] array;
     private int size = 0;
 
-    @SuppressWarnings("unchecked")
     public MyArrayList(int size) {
-        array = (T[]) Array.newInstance(this.getClass(), size);
+        this.array = new Object[size];
     }
 
-    @SuppressWarnings("unchecked")
     public MyArrayList() {
-        array = (T[]) Array.newInstance(this.getClass(), CAPACITY);
+        this.array = new Object[CAPACITY];
     }
 
     @Override
@@ -41,12 +38,13 @@ public class MyArrayList<T> implements List<T> {
         return true;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public T get(int index) {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException();
         }
-        return array[index];
+        return (T) array[index];
     }
 
     @Override

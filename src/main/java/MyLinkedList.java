@@ -103,6 +103,15 @@ public class MyLinkedList<T> implements List<T> {
 
     @Override
     public void sort() {
+        MyArrayList<T> arrayList = new MyArrayList<>();
+        for (int i = 0; i < size; i++) {
+            arrayList.add(get(i));
+        }
+        arrayList.sort();
+        clear();
+        for (int i = 0; i < arrayList.size(); i++) {
+            add(arrayList.get(i));
+        }
 
     }
 
