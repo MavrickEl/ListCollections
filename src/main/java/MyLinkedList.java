@@ -1,3 +1,9 @@
+/**
+ * Custom implementation of a doubly linked list.
+ * Supports adding, removing, sorting, and other operations.
+ *
+ * @param <T> the type of elements in the list
+ */
 public class MyLinkedList<T> implements List<T> {
 
     private Node<T> first;
@@ -7,6 +13,12 @@ public class MyLinkedList<T> implements List<T> {
     public MyLinkedList() {
     }
 
+    /**
+     * Adds an element to the end of the linked list.
+     *
+     * @param object the element to be added
+     * @return true if the element was added successfully
+     */
     @Override
     public boolean add(T object) {
         if (size == 0) {
@@ -21,6 +33,13 @@ public class MyLinkedList<T> implements List<T> {
         return true;
     }
 
+    /**
+     * Adds an element at a specified index in the linked list.
+     *
+     * @param object the element to be added
+     * @param index  the index at which the element is to be added
+     * @return true if the element was added successfully
+     */
     @Override
     public boolean add(T object, int index) {
         if (index < 0 || index > size) {
@@ -43,16 +62,35 @@ public class MyLinkedList<T> implements List<T> {
         return true;
     }
 
+    /**
+     * Retrieves the element at the specified index in the linked list.
+     * Calls getNode() method to get the value.
+     *
+     * @param index the index of the element to retrieve
+     * @return the element at the specified index
+     * @throws IndexOutOfBoundsException if the index is out of range
+     */
     @Override
     public T get(int index) {
         return getNode(index).value;
     }
 
+    /**
+     * Returns the current size of the linked list.
+     *
+     * @return the size of the linked list
+     */
     @Override
     public int size() {
         return size;
     }
 
+    /**
+     * Removes the element at the specified index from the linked list.
+     *
+     * @param index the index of the element to be removed
+     * @return true if the element was removed successfully
+     */
     @Override
     public boolean removeAt(int index) {
         Node<T> node = getNode(index);
@@ -72,6 +110,12 @@ public class MyLinkedList<T> implements List<T> {
         return true;
     }
 
+    /**
+     * Removes the first occurrence of the specified element from the linked list.
+     *
+     * @param object the element to be removed
+     * @return true if the element was found and removed successfully
+     */
     @Override
     public boolean remove(T object) {
         Node<T> node = first;
@@ -84,6 +128,12 @@ public class MyLinkedList<T> implements List<T> {
         return false;
     }
 
+    /**
+     * Checks if the linked list contains the specified element.
+     *
+     * @param object the element to be checked
+     * @return true if the linked list contains the element, false otherwise
+     */
     @Override
     public boolean contains(T object) {
         Node<T> second = first;
@@ -101,6 +151,10 @@ public class MyLinkedList<T> implements List<T> {
         return false;
     }
 
+    /**
+     * Sorts the elements in the linked list in natural order.
+     * Uses an auxiliary MyArrayList for sorting.
+     */
     @Override
     public void sort() {
         MyArrayList<T> arrayList = new MyArrayList<>();
@@ -115,6 +169,9 @@ public class MyLinkedList<T> implements List<T> {
 
     }
 
+    /**
+     * Removes all elements from the linked list, leaving it empty.
+     */
     @Override
     public void clear() {
         first = null;
@@ -122,6 +179,13 @@ public class MyLinkedList<T> implements List<T> {
         size = 0;
     }
 
+    /**
+     * Retrieves the node at the specified index in the linked list.
+     *
+     * @param index the index of the node to retrieve
+     * @return the node at the specified index
+     * @throws IndexOutOfBoundsException if the index is out of range
+     */
     public Node<T> getNode(int index) {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException();
@@ -133,6 +197,11 @@ public class MyLinkedList<T> implements List<T> {
         return node;
     }
 
+    /**
+     * Node class representing elements in the linked list.
+     *
+     * @param <T> the type of value in the node
+     */
     private static class Node<T> {
         private Node<T> previous;
         T value;
