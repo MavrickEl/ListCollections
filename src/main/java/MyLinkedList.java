@@ -1,3 +1,6 @@
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 /**
  * Custom implementation of a doubly linked list.
  * Supports adding, removing, sorting, and other operations.
@@ -218,6 +221,36 @@ public class MyLinkedList<T> implements List<T> {
             return "Node{" +
                     "value=" + value +
                     '}';
+        }
+    }
+    @Override
+    public Iterator<T> iterator() {
+        return new MyLinkedListIterator();
+    }
+    /**
+     * Custom iterator implementation for MyLinkedList.
+     */
+    private class MyLinkedListIterator implements Iterator<T> {
+        private Node<T> current = first;
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            T value = current.value;
+            current = current.next;
+            return value;
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("remove operation is not supported");
         }
     }
 

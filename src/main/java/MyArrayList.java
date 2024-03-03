@@ -1,5 +1,7 @@
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Custom implementation of a dynamic array list.
@@ -159,9 +161,44 @@ public class MyArrayList<T> implements List<T> {
 
     @Override
     public String toString() {
-        return "MyArrayList{" +
-                "array=" + Arrays.toString(array) +
-                ", size=" + size +
-                '}';
+        StringBuilder sb = new StringBuilder("[");
+        for (int i = 0; i < size; i++) {
+            sb.append(array[i]);
+            if (i < size - 1) {
+                sb.append(", ");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new MyArrayListIterator();
+    }
+
+    /**
+     * Custom iterator implementation for MyArrayList.
+     */
+    private class MyArrayListIterator implements Iterator<T> {
+        private int currentIndex = 0;
+
+        @Override
+        public boolean hasNext() {
+            return currentIndex < size;
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            return get(currentIndex++);
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("remove operation is not supported");
+        }
     }
 }

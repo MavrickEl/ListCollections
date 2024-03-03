@@ -4,7 +4,7 @@
  *
  * @param <T> the type of elements in the list
  */
-public interface List<T> {
+public interface List<T> extends Iterable<T>{
     boolean add(T object);
 
     boolean add(T object, int index);
